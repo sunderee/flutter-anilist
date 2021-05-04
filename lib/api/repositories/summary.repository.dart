@@ -7,7 +7,7 @@ import 'package:c2sanilist/utils/exceptions/api.exception.dart';
 import 'package:flutter/foundation.dart';
 
 abstract class _ISummaryRepository {
-  Future<List<SummaryModel>> fetchSummary({int page = 1, int perPage = 50});
+  Future<List<SummaryModel>> fetchSummary(int page, int perPage);
 }
 
 class SummaryRepository implements _ISummaryRepository {
@@ -17,10 +17,7 @@ class SummaryRepository implements _ISummaryRepository {
   factory SummaryRepository.instance() => _instance;
 
   @override
-  Future<List<SummaryModel>> fetchSummary({
-    int page = 1,
-    int perPage = 50,
-  }) async {
+  Future<List<SummaryModel>> fetchSummary(int page, int perPage) async {
     final rawRequest = await makeGraphQLRequest(
       FETCH_HOMEPAGE,
       variables: {'page': page, 'perPage': perPage},
