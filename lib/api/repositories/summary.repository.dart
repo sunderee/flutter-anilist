@@ -34,7 +34,9 @@ Future<List<SummaryModel>> _parseFetchSummary(String rawRequest) async {
     final request = json.decode(rawRequest) as Map<String, dynamic>;
     final summaries = (request['data']['Page']['media'] as List<dynamic>)
         .cast<Map<String, dynamic>>()
-        .where((element) => element['coverImage']['large'] != null)
+        .where((element) =>
+            element['coverImage']['large'] != null &&
+            element['description'] != null)
         .map((element) => SummaryModel.fromJson(element))
         .toList();
     return summaries;

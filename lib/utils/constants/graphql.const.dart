@@ -10,6 +10,7 @@ query(
                 romaji
                 english
             }
+            description
             coverImage { large }
         }
     }
