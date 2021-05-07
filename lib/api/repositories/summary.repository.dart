@@ -18,12 +18,11 @@ class SummaryRepository implements _ISummaryRepository {
   factory SummaryRepository.instance() => _instance;
 
   @override
-  Future<List<SummaryModel>> fetchSummary(int page, int perPage) async {
-    return compute<Pair<String, Map<String, dynamic>>, List<SummaryModel>>(
-      _parseFetchSummary,
-      Pair(FETCH_HOMEPAGE, {'page': page, 'perPage': perPage}),
-    );
-  }
+  Future<List<SummaryModel>> fetchSummary(int page, int perPage) async =>
+      compute<Pair<String, Map<String, dynamic>>, List<SummaryModel>>(
+        _parseFetchSummary,
+        Pair(FETCH_HOMEPAGE, {'page': page, 'perPage': perPage}),
+      );
 }
 
 Future<List<SummaryModel>> _parseFetchSummary(

@@ -18,12 +18,11 @@ class DetailsRepository implements _IDetailsRepository {
   factory DetailsRepository.instance() => _instance;
 
   @override
-  Future<DetailsModel?> fetchMedia(int mediaID) async {
-    return compute<Pair<String, Map<String, dynamic>>, DetailsModel?>(
-      _parseFetchMedia,
-      Pair(FETCH_DETAILS, {'id': mediaID}),
-    );
-  }
+  Future<DetailsModel?> fetchMedia(int mediaID) async =>
+      compute<Pair<String, Map<String, dynamic>>, DetailsModel?>(
+        _parseFetchMedia,
+        Pair(FETCH_DETAILS, {'id': mediaID}),
+      );
 }
 
 Future<DetailsModel?> _parseFetchMedia(
