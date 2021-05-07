@@ -14,71 +14,69 @@ class SummaryWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        BlocProvider.of<DetailsBloc>(context).add(
-          DetailsEvent.retrieve(data.id),
-        );
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => DetailsScreen(),
+  Widget build(BuildContext context) => InkWell(
+        onTap: () {
+          BlocProvider.of<DetailsBloc>(context).add(
+            DetailsEvent.retrieve(data.id),
+          );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => DetailsScreen(),
+            ),
+          );
+        },
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
           ),
-        );
-      },
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        child: Container(
-          color: COLOR_BACKGROUND,
-          padding: null,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AspectRatio(
-                aspectRatio: 6 / 4,
-                child: Image.network(data.mediaURL, fit: BoxFit.cover),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 12.0,
-                  left: 24.0,
-                  right: 24.0,
+          child: Container(
+            color: COLOR_BACKGROUND,
+            padding: null,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AspectRatio(
+                  aspectRatio: 6 / 4,
+                  child: Image.network(data.mediaURL, fit: BoxFit.cover),
                 ),
-                child: Text(
-                  data.title,
-                  style: TextStyle(
-                    fontSize: 22.0,
-                    color: COLOR_TEXT_PRIMARY,
-                    fontWeight: FontWeight.w700,
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 12.0,
+                    left: 24.0,
+                    right: 24.0,
+                  ),
+                  child: Text(
+                    data.title,
+                    style: TextStyle(
+                      fontSize: 22.0,
+                      color: COLOR_TEXT_PRIMARY,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 4.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 12.0,
-                  left: 24.0,
-                  right: 24.0,
+                SizedBox(
+                  height: 4.0,
                 ),
-                child: Text(
-                  data.description,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: COLOR_TEXT_SECONDARY,
+                Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 12.0,
+                    left: 24.0,
+                    right: 24.0,
+                  ),
+                  child: Text(
+                    data.description,
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: COLOR_TEXT_SECONDARY,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }

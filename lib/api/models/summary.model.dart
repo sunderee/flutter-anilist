@@ -15,21 +15,19 @@ class SummaryModel extends Equatable {
     required this.mediaURL,
   });
 
-  factory SummaryModel.fromJson(Map<String, dynamic> json) {
-    return SummaryModel._(
-      id: json['id'],
-      title: json['title']['english'] ?? json['title']['romaji'],
-      description: ((json['description'] as String).split(' ')).length < 20
-          ? json['description']
-          : (json['description'] as String)
-                  .split(' ')
-                  .sublist(0, 20)
-                  .join(' ')
-                  .replaceAll(r'<[^>]*>', '') +
-              '...',
-      mediaURL: json['coverImage']['large'],
-    );
-  }
+  factory SummaryModel.fromJson(Map<String, dynamic> json) => SummaryModel._(
+        id: json['id'],
+        title: json['title']['english'] ?? json['title']['romaji'],
+        description: ((json['description'] as String).split(' ')).length < 20
+            ? json['description']
+            : (json['description'] as String)
+                    .split(' ')
+                    .sublist(0, 20)
+                    .join(' ')
+                    .replaceAll(r'<[^>]*>', '') +
+                '...',
+        mediaURL: json['coverImage']['large'],
+      );
 
   @override
   List<Object?> get props => [
