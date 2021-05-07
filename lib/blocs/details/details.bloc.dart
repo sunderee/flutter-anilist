@@ -1,8 +1,10 @@
 import 'package:c2sanilist/api/repositories/details.repository.dart';
 import 'package:c2sanilist/blocs/details/details.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meta/meta.dart';
 
 class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
+  @internal
   final DetailsRepository repository;
 
   DetailsBloc({
