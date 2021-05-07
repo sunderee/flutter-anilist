@@ -12,7 +12,6 @@ class DetailsModel extends Equatable {
   final String? format;
   final int? episodes;
   final int? duration;
-  final String? countryOfOrigin;
 
   DetailsModel._({
     required this.title,
@@ -23,19 +22,17 @@ class DetailsModel extends Equatable {
     required this.format,
     required this.episodes,
     required this.duration,
-    required this.countryOfOrigin,
   });
 
   factory DetailsModel.fromJson(Map<String, dynamic> json) => DetailsModel._(
         title: Pair(json['title']['romaji'], json['title']['english']),
-        description: json['description'],
+        description: (json['description'] as String).replaceAll(r'<[^>]*>', ''),
         mediaURL: json['coverImage']['large'],
         genres: (json['genres'] as List<dynamic>).cast<String>(),
         type: json['type'],
         format: json['format'],
         episodes: json['episodes'],
         duration: json['duration'],
-        countryOfOrigin: json['countryOfOrigin'],
       );
 
   @override
@@ -48,6 +45,5 @@ class DetailsModel extends Equatable {
         format,
         episodes,
         duration,
-        countryOfOrigin,
       ];
 }

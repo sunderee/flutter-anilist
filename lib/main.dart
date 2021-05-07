@@ -1,4 +1,6 @@
+import 'package:c2sanilist/api/repositories/details.repository.dart';
 import 'package:c2sanilist/api/repositories/summary.repository.dart';
+import 'package:c2sanilist/blocs/details/details.dart';
 import 'package:c2sanilist/blocs/summary/summary.bloc.dart';
 import 'package:c2sanilist/blocs/summary/summary.dart';
 import 'package:c2sanilist/ui/app.dart';
@@ -13,8 +15,14 @@ void main() {
           create: (_) => SummaryBloc(
             repository: SummaryRepository.instance(),
           )..add(SummaryEvent.retrieve(1, 50)),
-          lazy: true,
+          lazy: false,
         ),
+        BlocProvider<DetailsBloc>(
+          create: (_) => DetailsBloc(
+            repository: DetailsRepository.instance(),
+          ),
+          lazy: true,
+        )
       ],
       child: App(),
     ),

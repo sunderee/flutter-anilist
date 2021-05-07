@@ -27,7 +27,5 @@ query($id: Int!) {
 
         episodes
         duration
-
-        countryOfOrigin
     }
 }''';

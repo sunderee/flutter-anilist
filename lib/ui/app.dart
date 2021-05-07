@@ -11,7 +11,6 @@ class App extends StatelessWidget {
     );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: HomeScreen.ROUTE,
       theme: ThemeData(
         primaryColor: COLOR_PRODUCT,
         accentColor: COLOR_PRODUCT,
@@ -20,9 +19,7 @@ class App extends StatelessWidget {
           elevation: 0.0,
         ),
       ),
-      routes: {
-        HomeScreen.ROUTE: (_) => HomeScreen(),
-      },
+      home: HomeScreen(),
     );
   }
 }
