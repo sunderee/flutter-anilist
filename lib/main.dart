@@ -1,3 +1,4 @@
+import 'package:c2sanilist/api/repositories/summary.repository.dart';
 import 'package:c2sanilist/blocs/summary/summary.bloc.dart';
 import 'package:c2sanilist/blocs/summary/summary.dart';
 import 'package:c2sanilist/ui/app.dart';
@@ -9,7 +10,9 @@ void main() {
     MultiBlocProvider(
       providers: <BlocProvider>[
         BlocProvider<SummaryBloc>(
-          create: (_) => SummaryBloc()..add(SummaryEvent.retrieve(1, 50)),
+          create: (_) => SummaryBloc(
+            repository: SummaryRepository.instance(),
+          )..add(SummaryEvent.retrieve(1, 50)),
           lazy: true,
         ),
       ],
