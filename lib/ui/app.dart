@@ -10,6 +10,7 @@ class App extends StatelessWidget {
       SystemUiOverlayStyle(statusBarColor: Colors.transparent),
     );
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: HomeScreen.ROUTE,
       theme: ThemeData(
         primaryColor: COLOR_PRODUCT,

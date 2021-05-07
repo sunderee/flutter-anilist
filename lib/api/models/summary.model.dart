@@ -19,12 +19,13 @@ class SummaryModel extends Equatable {
     return SummaryModel._(
       id: json['id'],
       title: json['title']['english'] ?? json['title']['romaji'],
-      description: ((json['description'] as String).split(' ')).length < 15
+      description: ((json['description'] as String).split(' ')).length < 20
           ? json['description']
           : (json['description'] as String)
                   .split(' ')
-                  .sublist(0, 15)
-                  .join(' ') +
+                  .sublist(0, 20)
+                  .join(' ')
+                  .replaceAll(r'<[^>]*>', '') +
               '...',
       mediaURL: json['coverImage']['large'],
     );

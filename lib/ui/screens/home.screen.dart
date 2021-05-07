@@ -1,4 +1,5 @@
 import 'package:c2sanilist/blocs/summary/summary.dart';
+import 'package:c2sanilist/ui/widgets/summary.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,15 +31,13 @@ class HomeScreen extends StatelessWidget {
               },
               child: SafeArea(
                 minimum: const EdgeInsets.only(top: 16.0),
-                child: ListView.builder(
+                child: ListView.separated(
                   itemCount: state.data.length,
-                  itemBuilder: (_, int index) => ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(state.data[index].mediaURL),
-                      radius: 24.0,
-                    ),
-                    title: Text(state.data[index].title),
-                    subtitle: Text(state.data[index].description),
+                  itemBuilder: (_, int index) => SummaryWidget(
+                    data: state.data[index],
+                  ),
+                  separatorBuilder: (_, __) => SizedBox(
+                    height: 16.0,
                   ),
                 ),
               ),
