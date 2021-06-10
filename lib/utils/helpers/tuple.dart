@@ -10,8 +10,5 @@ class Pair<A, B> extends Equatable {
   const Pair(this.first, this.second);
 
   @override
-  String toString() => 'Pair: $first, $second';
-
-  @override
   List<Object?> get props => [first, second];
 }
