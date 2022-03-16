@@ -26,6 +26,7 @@ dependencies:
   # Miscellaneous
   meta: ^1.7.0
   equatable: ^2.0.3
+  loggy: ^2.0.1+1
 
 dev_dependencies:
   # Launcher icons
