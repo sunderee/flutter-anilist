@@ -1,9 +1,8 @@
 import 'package:c2sanilist/utils/helpers/tuple.dart';
-import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class DetailsModel extends Equatable {
+class DetailsModel {
   final Pair<String, String?> title;
   final String description;
   final String mediaURL;
@@ -13,7 +12,7 @@ class DetailsModel extends Equatable {
   final int? episodes;
   final int? duration;
 
-  DetailsModel._({
+  const DetailsModel._({
     required this.title,
     required this.description,
     required this.mediaURL,
@@ -25,25 +24,16 @@ class DetailsModel extends Equatable {
   });
 
   factory DetailsModel.fromJson(Map<String, dynamic> json) => DetailsModel._(
-        title: Pair(json['title']['romaji'], json['title']['english']),
+        title: Pair(
+          json['title']['romaji'] as String,
+          json['title']['english'] as String,
+        ),
         description: (json['description'] as String).replaceAll(r'<[^>]*>', ''),
-        mediaURL: json['coverImage']['large'],
+        mediaURL: json['coverImage']['large'] as String,
         genres: (json['genres'] as List<dynamic>).cast<String>(),
-        type: json['type'],
-        format: json['format'],
-        episodes: json['episodes'],
-        duration: json['duration'],
+        type: json['type'] as String?,
+        format: json['format'] as String?,
+        episodes: json['episodes'] as int?,
+        duration: json['duration'] as int?,
       );
-
-  @override
-  List<Object?> get props => [
-        title,
-        description,
-        mediaURL,
-        genres,
-        type,
-        format,
-        episodes,
-        duration,
-      ];
 }

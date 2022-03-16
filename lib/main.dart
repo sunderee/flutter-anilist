@@ -1,7 +1,6 @@
 import 'package:c2sanilist/api/repositories/details.repository.dart';
 import 'package:c2sanilist/api/repositories/summary.repository.dart';
 import 'package:c2sanilist/blocs/details/details.dart';
-import 'package:c2sanilist/blocs/summary/summary.bloc.dart';
 import 'package:c2sanilist/blocs/summary/summary.dart';
 import 'package:c2sanilist/ui/app.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,7 @@ void main() {
           lazy: true,
         )
       ],
-      child: App(),
+      child: const App(),
     ),
   );
 }

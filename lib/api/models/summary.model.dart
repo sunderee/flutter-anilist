@@ -1,14 +1,13 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class SummaryModel extends Equatable {
+class SummaryModel {
   final int id;
   final String title;
   final String description;
   final String mediaURL;
 
-  SummaryModel._({
+  const SummaryModel._({
     required this.id,
     required this.title,
     required this.description,
@@ -16,24 +15,17 @@ class SummaryModel extends Equatable {
   });
 
   factory SummaryModel.fromJson(Map<String, dynamic> json) => SummaryModel._(
-        id: json['id'],
-        title: json['title']['english'] ?? json['title']['romaji'],
+        id: json['id'] as int,
+        title: json['title']['english'] as String? ??
+            json['title']['romaji'] as String,
         description: ((json['description'] as String).split(' ')).length < 20
-            ? json['description']
+            ? json['description'] as String
             : (json['description'] as String)
                     .split(' ')
                     .sublist(0, 20)
                     .join(' ')
                     .replaceAll(r'<[^>]*>', '') +
                 '...',
-        mediaURL: json['coverImage']['large'],
+        mediaURL: json['coverImage']['large'] as String,
       );
-
-  @override
-  List<Object?> get props => [
-        id,
-        title,
-        description,
-        mediaURL,
-      ];
 }

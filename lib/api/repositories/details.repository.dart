@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:c2sanilist/api/api.provider.dart';
 import 'package:c2sanilist/api/models/details.model.dart';
 import 'package:c2sanilist/utils/constants/graphql.const.dart';
-import 'package:c2sanilist/utils/exceptions/api.exception.dart';
 import 'package:c2sanilist/utils/helpers/tuple.dart';
 import 'package:flutter/foundation.dart';
 
@@ -28,15 +27,11 @@ class DetailsRepository implements _IDetailsRepository {
 Future<DetailsModel?> _parseFetchMedia(
   Pair<String, Map<String, dynamic>> data,
 ) async {
-  try {
-    final rawRequest = await makeGraphQLRequest(
-      data.first,
-      variables: data.second,
-    );
-    return DetailsModel.fromJson(
-      json.decode(rawRequest)['data']['Media'] as Map<String, dynamic>,
-    );
-  } on ApiException catch (e) {
-    print(e.toString());
-  }
+  final rawRequest = await makeGraphQLRequest(
+    data.first,
+    variables: data.second,
+  );
+  return DetailsModel.fromJson(
+    json.decode(rawRequest)['data']['Media'] as Map<String, dynamic>,
+  );
 }
