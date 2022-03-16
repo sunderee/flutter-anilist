@@ -1,7 +1,6 @@
 import 'package:c2sanilist/api/models/summary.model.dart';
-import 'package:c2sanilist/blocs/details/details.dart';
+import 'package:c2sanilist/blocs/details/details.cubit.dart';
 import 'package:c2sanilist/ui/screens/details.screen.dart';
-import 'package:c2sanilist/utils/constants/color.const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,15 +15,8 @@ class SummaryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => InkWell(
         onTap: () {
-          BlocProvider.of<DetailsBloc>(context).add(
-            DetailsEvent.retrieve(data.id),
-          );
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => DetailsScreen(),
-            ),
-          );
+          BlocProvider.of<DetailsCubit>(context).retrieveDetails(data.id);
+          DetailsScreen.navigateTo(context);
         },
         child: Card(
           clipBehavior: Clip.antiAlias,
@@ -32,8 +24,7 @@ class SummaryWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(30.0),
           ),
           child: Container(
-            color: COLOR_BACKGROUND,
-            padding: null,
+            color: Theme.of(context).colorScheme.background,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,14 +43,12 @@ class SummaryWidget extends StatelessWidget {
                     data.title,
                     style: TextStyle(
                       fontSize: 22.0,
-                      color: COLOR_TEXT_PRIMARY,
+                      color: Theme.of(context).colorScheme.onBackground,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 4.0,
-                ),
+                const SizedBox(height: 4.0),
                 Padding(
                   padding: const EdgeInsets.only(
                     bottom: 12.0,
@@ -70,7 +59,10 @@ class SummaryWidget extends StatelessWidget {
                     data.description,
                     style: TextStyle(
                       fontSize: 16.0,
-                      color: COLOR_TEXT_SECONDARY,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onBackground
+                          .withAlpha(235),
                     ),
                   ),
                 ),

@@ -1,9 +1,12 @@
 class ApiException implements Exception {
   final int statusCode;
-  final String rawBody;
+  final String? reason;
 
-  const ApiException(this.statusCode, this.rawBody);
+  const ApiException({
+    required this.statusCode,
+    this.reason,
+  });
 
   @override
-  String toString() => 'status code $statusCode\n$rawBody';
+  String toString() => '$runtimeType $statusCode: $reason';
 }
