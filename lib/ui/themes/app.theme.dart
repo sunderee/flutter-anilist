@@ -10,11 +10,16 @@ ThemeData lightAppTheme(BuildContext context) => ThemeData.from(
       ),
       textTheme: GoogleFonts.ralewayTextTheme(Theme.of(context).textTheme),
     ).copyWith(
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         elevation: 0.0,
         centerTitle: true,
         color: colorBackgroundLight,
-        titleTextStyle: TextStyle(color: Colors.black87),
+        titleTextStyle:
+            GoogleFonts.ralewayTextTheme(Theme.of(context).textTheme)
+                .headline6
+                ?.copyWith(
+                  color: Colors.black87,
+                ),
       ),
     );
 
@@ -26,10 +31,15 @@ ThemeData darkAppTheme(BuildContext context) => ThemeData.from(
       ),
       textTheme: GoogleFonts.ralewayTextTheme(Theme.of(context).textTheme),
     ).copyWith(
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         elevation: 0.0,
         centerTitle: true,
         color: colorBackgroundDark,
-        titleTextStyle: TextStyle(color: Colors.white),
+        titleTextStyle:
+            GoogleFonts.ralewayTextTheme(Theme.of(context).textTheme)
+                .headline6
+                ?.copyWith(
+                  color: Colors.white,
+                ),
       ),
     );
