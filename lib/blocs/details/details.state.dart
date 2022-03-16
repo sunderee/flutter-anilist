@@ -1,46 +1,32 @@
 import 'package:c2sanilist/api/models/details.model.dart';
+import 'package:c2sanilist/blocs/status.enum.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
-@sealed
-abstract class DetailsState extends Equatable {
-  const DetailsState._();
+class DetailsState extends Equatable {
+  final StatusEnum status;
+  final DetailsModel? data;
+  final String? errorMessage;
 
-  @protected
-  factory DetailsState.loading() = LoadingDetailsState;
+  const DetailsState({
+    required this.status,
+    this.data,
+    this.errorMessage,
+  });
 
-  @protected
-  factory DetailsState.successful(
-    DetailsModel data,
-  ) = SuccessfulDetailsState;
+  factory DetailsState.loading() => const DetailsState(
+        status: StatusEnum.loading,
+      );
 
-  @protected
-  factory DetailsState.failed(
-    String error,
-  ) = FailedDetailsState;
-}
+  factory DetailsState.successful(DetailsModel details) => DetailsState(
+        status: StatusEnum.successful,
+        data: details,
+      );
 
-class LoadingDetailsState extends DetailsState {
-  const LoadingDetailsState() : super._();
-
-  @override
-  List<Object?> get props => [];
-}
-
-class SuccessfulDetailsState extends DetailsState {
-  final DetailsModel data;
-
-  const SuccessfulDetailsState(this.data) : super._();
+  factory DetailsState.failed(String errorMessage) => DetailsState(
+        status: StatusEnum.failed,
+        errorMessage: errorMessage,
+      );
 
   @override
-  List<Object?> get props => [data];
-}
-
-class FailedDetailsState extends DetailsState {
-  final String error;
-
-  const FailedDetailsState(this.error) : super._();
-
-  @override
-  List<Object?> get props => [error];
+  List<Object?> get props => [status, data, errorMessage];
 }

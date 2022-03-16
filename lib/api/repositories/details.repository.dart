@@ -11,7 +11,7 @@ import 'package:flutter/foundation.dart';
 typedef FetchMediaInputType = Pair<ApiProvider, GraphQLRequestModel>;
 
 abstract class IDetailsRepository {
-  Future<DetailsModel?> fetchMedia(int mediaID);
+  Future<DetailsModel> fetchMedia(int mediaID);
 }
 
 class DetailsRepository implements IDetailsRepository {
@@ -20,13 +20,13 @@ class DetailsRepository implements IDetailsRepository {
   DetailsRepository() : _apiProvider = getIt.get<ApiProvider>();
 
   @override
-  Future<DetailsModel?> fetchMedia(int mediaID) async =>
+  Future<DetailsModel> fetchMedia(int mediaID) async =>
       compute<FetchMediaInputType, DetailsModel>(
         _parseFetchMedia,
         Pair(
           _apiProvider,
           GraphQLRequestModel(
-            query: FETCH_DETAILS,
+            query: fetchDetailsQuery,
             variables: {'id': mediaID},
           ),
         ),

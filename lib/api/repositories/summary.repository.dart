@@ -26,7 +26,7 @@ class SummaryRepository implements ISummaryRepository {
         Pair(
           _apiProvider,
           GraphQLRequestModel(
-            query: FETCH_HOMEPAGE,
+            query: fetchHomepageQuery,
             variables: {'page': page, 'perPage': perPage},
           ),
         ),

@@ -1,4 +1,4 @@
-const String FETCH_HOMEPAGE = r'''
+const String fetchHomepageQuery = r'''
 query(
     $page: Int!,
     $perPage: Int!
@@ -13,7 +13,7 @@ query(
     }
 }''';
 
-const String FETCH_DETAILS = r'''
+const String fetchDetailsQuery = r'''
 query($id: Int!) {
     Media(id: $id) {
         title { romaji english }
