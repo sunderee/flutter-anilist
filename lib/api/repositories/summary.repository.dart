@@ -1,39 +1,47 @@
 import 'dart:convert';
 
 import 'package:c2sanilist/api/api.provider.dart';
+import 'package:c2sanilist/api/models/graphql_request.model.dart';
 import 'package:c2sanilist/api/models/summary.model.dart';
+import 'package:c2sanilist/config/dependencies.config.dart';
 import 'package:c2sanilist/utils/constants/graphql.const.dart';
 import 'package:c2sanilist/utils/helpers/tuple.dart';
 import 'package:flutter/foundation.dart';
 
-abstract class _ISummaryRepository {
+typedef FetchSummaryInputType = Pair<ApiProvider, GraphQLRequestModel>;
+
+abstract class ISummaryRepository {
   Future<List<SummaryModel>> fetchSummary(int page, int perPage);
 }
 
-class SummaryRepository implements _ISummaryRepository {
-  static final SummaryRepository _instance = SummaryRepository._();
+class SummaryRepository implements ISummaryRepository {
+  final ApiProvider _apiProvider;
 
-  SummaryRepository._();
-  factory SummaryRepository.instance() => _instance;
+  SummaryRepository() : _apiProvider = getIt.get<ApiProvider>();
 
   @override
   Future<List<SummaryModel>> fetchSummary(int page, int perPage) async =>
-      compute<Pair<String, Map<String, dynamic>>, List<SummaryModel>>(
+      compute<FetchSummaryInputType, List<SummaryModel>>(
         _parseFetchSummary,
-        Pair(FETCH_HOMEPAGE, {'page': page, 'perPage': perPage}),
+        Pair(
+          _apiProvider,
+          GraphQLRequestModel(
+            query: FETCH_HOMEPAGE,
+            variables: {'page': page, 'perPage': perPage},
+          ),
+        ),
       );
 }
 
 Future<List<SummaryModel>> _parseFetchSummary(
-  Pair<String, Map<String, dynamic>> data,
+  FetchSummaryInputType input,
 ) async {
-  final rawRequest = await makeGraphQLRequest(
-    data.first,
-    variables: data.second,
+  final rawResponse = await input.first.makeGraphQLRequest(
+    request: input.second,
   );
+  final response = json.decode(rawResponse) as Map<String, dynamic>;
 
-  final request = json.decode(rawRequest) as Map<String, dynamic>;
-  return (request['data']['Page']['media'] as List<dynamic>)
+  return (response['data']['Page']['media'] as List<dynamic>)
       .cast<Map<String, dynamic>>()
       .where((element) =>
           element['coverImage']['large'] != null &&

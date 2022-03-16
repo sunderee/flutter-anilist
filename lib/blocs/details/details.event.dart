@@ -6,7 +6,7 @@ abstract class DetailsEvent extends Equatable {
   const DetailsEvent._();
 
   @protected
-  factory DetailsEvent.retrieve(int mediaID) = RetrieveDetailsEvent;
+  const factory DetailsEvent.retrieve(int mediaID) = RetrieveDetailsEvent;
 }
 
 class RetrieveDetailsEvent extends DetailsEvent {

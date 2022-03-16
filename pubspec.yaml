@@ -15,8 +15,10 @@ dependencies:
   flutter_bloc: ^8.0.1
   get_it: ^7.2.0
 
-  # Networking
+  # Networking + JSON serialization/deserialization annotations
   http: ^0.13.4
+  freezed_annotation: ^1.1.0
+  json_annotation: ^4.4.0
 
   # UI
   google_fonts: ^2.3.1
@@ -28,7 +30,16 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  # Linter
   flutter_lints: ^1.0.4
+
+  # Build runner
+  build_runner: ^2.1.8
+
+  # JSON serialization/deserialization
+  freezed: ^1.1.1
+  json_serializable: ^6.1.5
 
 flutter:
   uses-material-design: true

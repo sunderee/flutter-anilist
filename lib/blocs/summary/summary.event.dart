@@ -6,7 +6,10 @@ abstract class SummaryEvent extends Equatable {
   const SummaryEvent._();
 
   @protected
-  factory SummaryEvent.retrieve(int page, int perPage) = RetrieveSummaryEvent;
+  const factory SummaryEvent.retrieve(
+    int page,
+    int perPage,
+  ) = RetrieveSummaryEvent;
 }
 
 class RetrieveSummaryEvent extends SummaryEvent {

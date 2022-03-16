@@ -1,7 +1,6 @@
 import 'package:c2sanilist/api/models/summary.model.dart';
 import 'package:c2sanilist/blocs/details/details.dart';
 import 'package:c2sanilist/ui/screens/details.screen.dart';
-import 'package:c2sanilist/utils/constants/color.const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
