@@ -20,6 +20,7 @@ ThemeData lightAppTheme(BuildContext context) => ThemeData.from(
                 ?.copyWith(
                   color: Colors.black87,
                 ),
+        iconTheme: const IconThemeData(color: Colors.black87),
       ),
     );
 
@@ -41,5 +42,6 @@ ThemeData darkAppTheme(BuildContext context) => ThemeData.from(
                 ?.copyWith(
                   color: Colors.white,
                 ),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
     );

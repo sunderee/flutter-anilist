@@ -1,19 +1,11 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class GraphQLRequestModel {
+  final String query;
+  final Map<String, dynamic>? variables;
 
-part 'graphql_request.model.freezed.dart';
-part 'graphql_request.model.g.dart';
+  GraphQLRequestModel({
+    required this.query,
+    this.variables,
+  });
 
-@freezed
-@immutable
-class GraphQLRequestModel with _$GraphQLRequestModel {
-  const factory GraphQLRequestModel({
-    @JsonKey(name: 'query') required String query,
-    @JsonKey(name: 'variables', includeIfNull: false)
-        Map<String, dynamic>? variables,
-  }) = _GraphQLRequestModel;
-
-  factory GraphQLRequestModel.fromJson(
-    Map<String, dynamic> json,
-  ) =>
-      _$GraphQLRequestModelFromJson(json);
+  Map<String, dynamic> toJson() => {'query': query, 'variables': variables};
 }

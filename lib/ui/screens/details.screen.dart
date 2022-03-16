@@ -14,76 +14,91 @@ class DetailsScreen extends StatelessWidget {
   const DetailsScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: BlocBuilder<DetailsCubit, DetailsState>(
-          builder: (BuildContext context, DetailsState state) {
-            if (state.status == StatusEnum.loading) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state.status == StatusEnum.failed) {
-              return Center(child: Text(state.errorMessage ?? 'Unknown'));
-            } else if (state.status == StatusEnum.successful &&
-                state.data != null) {
-              final data = state.data as DetailsModel;
-              return NestedScrollView(
-                headerSliverBuilder: (_, bool innerBoxIsScrolled) {
-                  return [
-                    SliverAppBar(
-                      expandedHeight: MediaQuery.of(context).size.height / 4,
-                      floating: false,
-                      pinned: true,
-                      flexibleSpace: FlexibleSpaceBar(
-                        centerTitle: true,
-                        background: Image.network(
-                          data.mediaURL,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Details')),
+      body: BlocBuilder<DetailsCubit, DetailsState>(
+        builder: (BuildContext context, DetailsState state) {
+          if (state.status == StatusEnum.loading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state.status == StatusEnum.failed) {
+            return Center(child: Text(state.errorMessage ?? 'Unknown'));
+          } else if (state.status == StatusEnum.successful &&
+              state.data != null) {
+            final data = state.data as DetailsModel;
+            return ListView(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              children: [
+                Image.network(
+                  data.mediaURL,
+                  fit: BoxFit.cover,
+                ),
+                const SizedBox(height: 8.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Text(
+                    data.title.second != null
+                        ? '${data.title.first} (${data.title.second})'
+                        : data.title.first,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.w700,
                     ),
-                  ];
-                },
-                body: SafeArea(
-                  minimum: const EdgeInsets.all(16.0),
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    children: [
-                      Text(
-                        data.title.second != null
-                            ? '${data.title.first} (${data.title.second})'
-                            : data.title.first,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onBackground,
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      Text(
-                        '${data.type}, ${data.format} | ${data.genres.join(', ')}',
-                      ),
-                      const SizedBox(height: 16.0),
-                      data.duration != null
-                          ? ListTile(
-                              leading: const Icon(Icons.timelapse),
-                              title: Text('${data.duration} minutes'),
-                            )
-                          : const SizedBox(),
-                      data.episodes != null
-                          ? ListTile(
-                              leading: const Icon(Icons.list),
-                              title: Text('${data.episodes} episodes'),
-                            )
-                          : const SizedBox(),
-                      const Divider(),
-                      Text(data.description),
-                    ],
                   ),
                 ),
-              );
-            } else {
-              return Center(
-                child: Text('Application error, ${state.runtimeType}'),
-              );
-            }
-          },
-        ),
-      );
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Text(
+                    '${data.type}, ${data.format} | ${data.genres.join(', ')}',
+                    style: TextStyle(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onBackground
+                          .withAlpha(235),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16.0),
+                if (data.duration != null)
+                  ListTile(
+                    leading: const Icon(Icons.timelapse),
+                    title: Text(
+                      '${data.duration} minutes',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
+                    ),
+                  ),
+                if (data.episodes != null)
+                  ListTile(
+                    leading: const Icon(Icons.list),
+                    title: Text(
+                      '${data.episodes} episodes',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
+                    ),
+                  ),
+                const Divider(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Text(
+                    data.description,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          } else {
+            return Center(
+              child: Text('Application error, ${state.runtimeType}'),
+            );
+          }
+        },
+      ),
+    );
+  }
 }

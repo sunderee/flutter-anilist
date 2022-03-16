@@ -26,9 +26,12 @@ class DetailsModel {
   factory DetailsModel.fromJson(Map<String, dynamic> json) => DetailsModel._(
         title: Pair(
           json['title']['romaji'] as String,
-          json['title']['english'] as String,
+          json['title']['english'] as String?,
         ),
-        description: (json['description'] as String).replaceAll(r'<[^>]*>', ''),
+        description: (json['description'] as String).replaceAll(
+          RegExp(r'<[^>]*>'),
+          '',
+        ),
         mediaURL: json['coverImage']['large'] as String,
         genres: (json['genres'] as List<dynamic>).cast<String>(),
         type: json['type'] as String?,

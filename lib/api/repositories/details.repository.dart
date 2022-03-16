@@ -5,6 +5,7 @@ import 'package:c2sanilist/api/models/details.model.dart';
 import 'package:c2sanilist/api/models/graphql_request.model.dart';
 import 'package:c2sanilist/config/dependencies.config.dart';
 import 'package:c2sanilist/utils/constants/graphql.const.dart';
+import 'package:c2sanilist/utils/helpers/format_query.helper.dart';
 import 'package:c2sanilist/utils/helpers/tuple.dart';
 import 'package:flutter/foundation.dart';
 
@@ -26,7 +27,7 @@ class DetailsRepository implements IDetailsRepository {
         Pair(
           _apiProvider,
           GraphQLRequestModel(
-            query: fetchDetailsQuery,
+            query: formatQuery(fetchDetailsQuery),
             variables: {'id': mediaID},
           ),
         ),

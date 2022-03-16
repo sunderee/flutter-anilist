@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:c2sanilist/api/models/graphql_request.model.dart';
 import 'package:c2sanilist/utils/exceptions/api.exception.dart';
-import 'package:c2sanilist/utils/helpers/format_query.helper.dart';
 import 'package:http/http.dart';
 
 class ApiProvider {
@@ -15,9 +14,7 @@ class ApiProvider {
     final response = await post(
       _baseUri,
       headers: {HttpHeaders.contentTypeHeader: ContentType.json.toString()},
-      body: json.encode(
-        request.copyWith(query: formatQuery(request.query)).toJson(),
-      ),
+      body: json.encode(request.toJson()),
     );
 
     if (response.statusCode < 200 || response.statusCode >= 300) {

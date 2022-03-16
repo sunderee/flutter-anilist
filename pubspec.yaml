@@ -17,8 +17,6 @@ dependencies:
 
   # Networking + JSON serialization/deserialization annotations
   http: ^0.13.4
-  freezed_annotation: ^1.1.0
-  json_annotation: ^4.4.0
 
   # UI
   google_fonts: ^2.3.1
@@ -34,13 +32,6 @@ dev_dependencies:
 
   # Linter
   flutter_lints: ^1.0.4
-
-  # Build runner
-  build_runner: ^2.1.8
-
-  # JSON serialization/deserialization
-  freezed: ^1.1.1
-  json_serializable: ^6.1.5
 
 flutter_icons:
   android: launcher_icon

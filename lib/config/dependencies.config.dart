@@ -7,10 +7,13 @@ import 'package:c2sanilist/blocs/summary/summary.event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:loggy/loggy.dart';
 
 final GetIt getIt = GetIt.instance;
 
 void initializeDependencies() {
+  Loggy.initLoggy();
+
   getIt.registerSingleton<ApiProvider>(ApiProvider());
   getIt.registerSingleton<ISummaryRepository>(SummaryRepository());
   getIt.registerSingleton<IDetailsRepository>(DetailsRepository());

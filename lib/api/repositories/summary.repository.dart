@@ -5,6 +5,7 @@ import 'package:c2sanilist/api/models/graphql_request.model.dart';
 import 'package:c2sanilist/api/models/summary.model.dart';
 import 'package:c2sanilist/config/dependencies.config.dart';
 import 'package:c2sanilist/utils/constants/graphql.const.dart';
+import 'package:c2sanilist/utils/helpers/format_query.helper.dart';
 import 'package:c2sanilist/utils/helpers/tuple.dart';
 import 'package:flutter/foundation.dart';
 
@@ -26,7 +27,7 @@ class SummaryRepository implements ISummaryRepository {
         Pair(
           _apiProvider,
           GraphQLRequestModel(
-            query: fetchHomepageQuery,
+            query: formatQuery(fetchHomepageQuery),
             variables: {'page': page, 'perPage': perPage},
           ),
         ),

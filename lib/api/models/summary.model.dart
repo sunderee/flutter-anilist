@@ -24,7 +24,7 @@ class SummaryModel {
                     .split(' ')
                     .sublist(0, 20)
                     .join(' ')
-                    .replaceAll(r'<[^>]*>', '') +
+                    .replaceAll(RegExp(r'<[^>]*>'), '') +
                 '...',
         mediaURL: json['coverImage']['large'] as String,
       );
