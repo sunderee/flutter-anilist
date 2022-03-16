@@ -28,8 +28,8 @@ dependencies:
   equatable: ^2.0.3
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  # Launcher icons
+  flutter_launcher_icons: ^0.9.2
 
   # Linter
   flutter_lints: ^1.0.4
@@ -41,5 +41,15 @@ dev_dependencies:
   freezed: ^1.1.1
   json_serializable: ^6.1.5
 
+flutter_icons:
+  android: launcher_icon
+  ios: true
+  image_path: assets/app_icon.png
+  image_path_android: assets/app_icon.png
+  image_path_ios: assets/app_icon_ios.png
+
 flutter:
   uses-material-design: true
+  assets:
+    - assets/app_icon.png
+    - assets/app_icon_ios.png

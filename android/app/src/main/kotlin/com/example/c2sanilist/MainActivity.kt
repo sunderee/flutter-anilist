@@ -1,4 +1,4 @@
-package com.peteralexbizjak.c2sanilist
+package com.example.c2sanilist
 
 import io.flutter.embedding.android.FlutterActivity
 
